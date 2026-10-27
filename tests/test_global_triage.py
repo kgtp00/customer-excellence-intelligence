@@ -17,6 +17,16 @@ class TriageTests(unittest.TestCase):
     def test_off_scope(self):
         r=triage(sample("Press Release Read Press Release Veeva DQS Cleans Data for Clinical Trials","Veeva","https://www.veeva.com/resources/data"))
         self.assertEqual(r["editorial_queue"],"off_scope_archive")
+    def test_across_allocation_not_archived(self):
+        r=triage(sample("Effectiveness vs Efficiency – You can't out-optimize a bad allocation"))
+        self.assertEqual(r["editorial_queue"],"priority_editorial_review")
+    def test_across_roi_not_archived(self):
+        r=triage(sample("The average ROI is a fiction no one should act on"))
+        self.assertEqual(r["editorial_queue"],"priority_editorial_review")
+    def test_maturometer_is_invitation_not_results(self):
+        r=triage(sample("Maturometer 2026: Shaping the industry view on customer engagement in the AI era"))
+        self.assertEqual(r["content_type_hint"],"survey_invitation")
+        self.assertEqual(r["editorial_queue"],"secondary_editorial_review")
     def test_no_auto_publication(self):
         r=triage(sample("HCP customer experience benchmarks"))
         self.assertFalse(r["auto_publish"])
