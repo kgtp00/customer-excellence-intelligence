@@ -1,0 +1,48 @@
+name: Daily global research discovery
+on:
+  schedule:
+    - cron: '23 6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: daily-intelligence-discovery
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run offline regression tests
+        run: PYTHONPATH=scripts python -m unittest discover -s tests -v
+      - name: Discover global public research links
+        run: python scripts/collect_global.py
+      - name: Triage discoveries
+        run: python scripts/triage_global.py data/global-review-candidates.json data/global-triage-report.json
+      - name: Generate public unreviewed link feed
+        run: python scripts/publish_discoveries.py
+      - name: Commit metadata-only feed, if changed
+        run: |
+          git add data/discoveries.json
+          if git diff --cached --quiet; then
+            echo "No changes to discovery feed."
+          else
+            git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "Refresh unreviewed global research links"
+            git push
+          fi
+      - name: Upload audit files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-global-collection-audit
+          path: |
+            data/global-review-candidates.json
+            data/global-triage-report.json
+          if-no-files-found: warn
+          retention-days: 7
