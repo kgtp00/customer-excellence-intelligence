@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "editorial_status": "manually-reviewed-source-summary",
   "verified_on": "2026-10-27",
   "collection": "Curated from source pages, not automatically approved from crawler",
@@ -20,7 +20,7 @@
       "ai": true,
       "priority": "High",
       "finding": "Across Health reports a September 2026 survey of 75 UK oncologists: 88% said they used AI tools professionally, while respondents anticipated changes in how they use MSLs and other information sources.",
-      "implication": "Consider how HCP information discovery changes when AI becomes an additional research interface, while keeping Medical Affairs ownership of scientific exchange distinct from commercial engagement.",
+      "implication": "Review how AI changes HCP information needs; coordinate the response with Medical Affairs.",
       "question": "Which information needs should be served through independent digital access, and which require scientific exchange?",
       "limitation": "Small UK oncology sample (n=75); stated expectations about future behaviour are not observed future outcomes. Publisher-operated survey.",
       "verified_on": "2026-10-27"
@@ -40,7 +40,7 @@
       "ai": true,
       "priority": "High",
       "finding": "Across Health distinguishes deciding where resources should go from making already-funded channels more efficient. It illustrates the distinction with anonymised brand and segment benchmark data.",
-      "implication": "Consider testing strategic resource allocation before intensifying channel-level optimisation or AI-driven personalisation.",
+      "implication": "Reassess where engagement resources go before optimising individual channels.",
       "question": "Where do current investments reflect inherited budgets rather than external evidence of customer value?",
       "limitation": "Publisher's commercial benchmarking framework and anonymised examples; not a causal demonstration that a specific change improves outcomes.",
       "verified_on": "2026-10-27"
@@ -60,7 +60,7 @@
       "ai": false,
       "priority": "High",
       "finding": "Across Health cites its 2025 Maturometer survey of 194 EU biopharma professionals: 94% considered external benchmarking relevant and 8% reported doing it routinely.",
-      "implication": "Assess whether existing measures connect engagement activity, customer perception and adoption outcomes to an external comparison.",
+      "implication": "Benchmark customer engagement outcomes externally, not just internal activity.",
       "question": "Do our KPIs diagnose causes of performance gaps, or simply describe internal activity?",
       "limitation": "Survey findings are vendor-reported; respondent representativeness and survey details should be checked before extrapolation.",
       "verified_on": "2026-10-27"
@@ -80,7 +80,7 @@
       "ai": false,
       "priority": "High",
       "finding": "The article argues that overall channel ROI can hide meaningful differences between HCP segments, making de-averaged allocation decisions more useful than a single blended figure.",
-      "implication": "Encourage segmented evaluation of engagement effectiveness rather than relying on aggregate channel dashboards.",
+      "implication": "Measure channel ROI by customer segment; averages can hide poor allocation.",
       "question": "Which high-value customer segments are hidden by blended effectiveness measures?",
       "limitation": "Argumentative industry perspective; the source does not establish a universal ROI effect size.",
       "verified_on": "2026-10-27"
@@ -100,7 +100,7 @@
       "ai": false,
       "priority": "High",
       "finding": "Across Health proposes evaluating channel choices through reach, impact and relative brand-level performance rather than reach and impact alone.",
-      "implication": "Explore whether channel planning distinguishes the market value of a channel from our own quality of execution within it.",
+      "implication": "Compare our channel performance against the market, not just our own reach.",
       "question": "On which channels are we present but relatively ineffective against competitors?",
       "limitation": "Conceptual framework supporting the publisher's benchmarking service; not independent comparative effectiveness research.",
       "verified_on": "2026-10-27"
@@ -120,7 +120,7 @@
       "ai": false,
       "priority": "High",
       "finding": "The authors argue that integration between personal and digital engagement matters more than treating channels as separate additions to a brand plan.",
-      "implication": "Evaluate whether field, email and digital interactions are designed as connected journeys with shared objectives.",
+      "implication": "Connect field and digital touchpoints into one planned customer journey.",
       "question": "Are we measuring channel activity independently instead of the customer experience they produce together?",
       "limitation": "Commercial thought leadership; examples and claimed uplift require contextual validation.",
       "verified_on": "2026-10-27"
@@ -141,7 +141,7 @@
       "ai": false,
       "priority": "High",
       "finding": "Indegene presents omnichannel as an operating model linking data, strategy, content, activation and measurement rather than a collection of disconnected campaigns.",
-      "implication": "Consider cross-functional end-to-end ownership and common measures across the engagement journey.",
+      "implication": "Give end-to-end ownership to the customer journey, not individual channels.",
       "question": "Which hand-offs between data, content, field and analytics break the intended customer journey?",
       "limitation": "Vendor-authored practitioner report; examples and interpretations are not independently audited benchmarks.",
       "verified_on": "2026-10-27"
@@ -161,7 +161,7 @@
       "ai": false,
       "priority": "High",
       "finding": "The report proposes viewing HCP consent and preference management as a progressive engagement capability, including value-led content, progressive profiling and opt-out handling.",
-      "implication": "Explore whether permission and preference data are treated as strategic engagement assets rather than purely compliance records.",
+      "implication": "Treat consent and channel preferences as engagement inputs, not just compliance records.",
       "question": "How much of our reachable audience has usable, current and meaningful channel preferences?",
       "limitation": "Practitioner recommendations, not a demonstrated causal proof of improved omnichannel performance.",
       "verified_on": "2026-10-27"
@@ -181,7 +181,7 @@
       "ai": false,
       "priority": "High",
       "finding": "Indegene recommends measuring congress-related digital conversations before, during and after events, rather than relying only on attendance, booth traffic and immediate engagement measures.",
-      "implication": "Investigate event-impact measures tied to sustained HCP discussion and appropriate follow-up, with clear Commercial–Medical role boundaries.",
+      "implication": "Measure congress impact before, during and after the event.",
       "question": "What valuable signals persist after a congress, and how should they influence subsequent engagement?",
       "limitation": "Vendor cases and stated performance outcomes may not be independently verified; applicability depends on platform coverage and compliance.",
       "verified_on": "2026-10-27"
@@ -201,7 +201,7 @@
       "ai": true,
       "priority": "High",
       "finding": "The report outlines a human-in-the-loop AI review model: automation assists with procedural checks while authorised Medical, Legal and Regulatory reviewers retain judgement and accountability.",
-      "implication": "Where enterprise-approved tools exist, consider low-risk automation of repetitive pre-review checks, measured against cycle time, rework and quality.",
+      "implication": "Pilot AI-supported pre-MLR checks while keeping expert approval.",
       "question": "Which content workflow steps are repetitive enough to automate safely without weakening oversight?",
       "limitation": "Performance improvement estimates are vendor-assembled and partly pilot-based, not independently established general benchmarks.",
       "verified_on": "2026-10-27"
@@ -221,7 +221,7 @@
       "ai": false,
       "priority": "Standard",
       "finding": "The article uses diagnosis, guiding policy and coherent actions to align user experience design around real user needs, including examples of HCP learning and patient education journeys.",
-      "implication": "Use a clear experience principle to align content, UX, medical input and channel design rather than accumulating features.",
+      "implication": "Design digital experiences around one clear user need.",
       "question": "What single customer problem should each digital journey solve before we add new capabilities?",
       "limitation": "Illustrative case examples and cited external evidence; not a controlled comparison of UX methods.",
       "verified_on": "2026-10-27"
@@ -242,7 +242,7 @@
       "ai": true,
       "priority": "High",
       "finding": "ZS experts argue that AI-enabled personalisation will underperform without customer context, connected workflows and attention to the sources of customer trust.",
-      "implication": "Frame AI opportunities around experience redesign and workflow integration, not isolated customer-facing AI features.",
+      "implication": "Redesign customer journeys before adding standalone AI features.",
       "question": "Where might a better customer journey matter more than introducing another AI tool?",
       "limitation": "Expert Q&A with illustrative examples; not independent evidence of achieved commercial performance. Publication date not confirmed.",
       "verified_on": "2026-10-27"
@@ -263,7 +263,7 @@
       "ai": true,
       "priority": "High",
       "finding": "ZS proposes an integrated CRM architecture connecting customer context, intelligence and activation, with workflow and AI-agent considerations.",
-      "implication": "Treat CRM-enabled transformation as a customer operating-model question, while respecting ownership of underlying enterprise platforms.",
+      "implication": "Assess CRM as an insight-to-action workflow, not only a database.",
       "question": "Do our CRM and analytics processes move from customer insight to useful action across roles?",
       "limitation": "Consultancy perspective, including vendor-reported impact estimates; publication date not confirmed.",
       "verified_on": "2026-10-27"
@@ -284,7 +284,7 @@
       "ai": true,
       "priority": "High",
       "finding": "Veeva's Q1 2026 report presents global and regional field-engagement trends using aggregated platform activity and describes emerging agentic call-report applications.",
-      "implication": "Compare operational channel trends with other evidence sources, and distinguish observed activity metrics from claims about AI impact.",
+      "implication": "Measure engagement quality separately from activity volume and AI claims.",
       "question": "Which engagement-quality measures go beyond activity volume and reflect actual customer value?",
       "limitation": "Veeva platform and product data may have selection and vendor bias; the exact page publication date was not independently confirmed.",
       "verified_on": "2026-10-27"
