@@ -54,10 +54,10 @@ def triage(row):
     # Source-aware commercial intelligence signals: broad words like ROI/NPS alone
     # would be too permissive on generic publisher websites.
     source_specific = source == "Across Health" and bool(re.search(
-        r"\\b(?:roi|nps|allocation|efficiency|effectiveness|share of voice|budget)\\b", text))
+        r"\b(?:roi|nps|allocation|efficiency|effectiveness|share of voice|budget)\b", text))
     strong = strong or source_specific
     survey_invitation = source == "Across Health" and bool(re.search(
-        r"\\bmaturometer 2026\\b", text))
+        r"\bmaturometer 2026\b", text))
     content_type_hint = ("survey_invitation" if survey_invitation else
                          "publisher_report_label" if kind in ("Industry Report", "White Paper") else
                          "publisher_editorial_or_unknown")
