@@ -20,7 +20,7 @@ TAGS = {
  "Processes & Operations": r"\b(?:commercial excellence|commercial operations|operating model|workflow|commercial effectiveness|efficiency|resource allocation|resource optimiz|execution|launch readiness|field force)\w*\b",
  "Channel Orchestration": r"\b(?:next.best.action|orchestrat|channel strategy|channel mix|field engagement|commercial crm|sales force|crm tech)\w*\b"
 }
-STRONG = re.compile(r"\b(?:omnichannel|customer engagement|customer experience|commercial excellence|commercial effectiveness|hcp|content supply chain|content operations|mlr|congress|customer journey|channel orchestrat\w*|benchmark\w*|crm|field engagement|patient support|agentic commercial|go.to.market|marketing|brand performance|brand success)\b",re.I)
+STRONG = re.compile(r"\b(?:omnichannel|customer engagement|customer experience|commercial excellence|commercial effectiveness|hcp|content supply chain|content operations|mlr|congress|customer journey|channel orchestrat\w*|benchmark\w*|crm|field engagement|patient support|agentic commercial|go.to.market|marketing|brand performance|brand success|resource allocation|budget allocation|fieldforce strategy|next.best.action)\b",re.I)
 MODERATE = re.compile(r"\b(?:ai|artificial intelligence|agentic|engagement|content|commercial|customer|market share|budget|experience|operating model|patient)\b",re.I)
 OFF_SCOPE = re.compile(r"\b(?:clinical trial|clinical research|clinical supply|clinical operations|ctms|pharmacovigilance|quality control|batch release|manufacturing|esource|e2b|drug discovery|clinical data|trial data|safety suite|study training|regulatory submissions|women.s health)\b",re.I)
 RESOURCE_PREFIX = re.compile(r"^(?:(?:Press Release|White Paper|Article|Industry Report|Demo|eBook|Video|Webinar)\s+)?(?:Read Press Release|Read Report|Read White Paper|Read Article|Read More|Learn More|Watch Demo|Watch Video|Watch Webinar)\s+", re.I)
@@ -51,6 +51,17 @@ def triage(row):
     strong=bool(STRONG.search(text))
     moderate=bool(MODERATE.search(text))
     out_of_scope=bool(OFF_SCOPE.search(text))
+    # Source-aware commercial intelligence signals: broad words like ROI/NPS alone
+    # would be too permissive on generic publisher websites.
+    source_specific = source == "Across Health" and bool(re.search(
+        r"\\b(?:roi|nps|allocation|efficiency|effectiveness|share of voice|budget)\\b", text))
+    strong = strong or source_specific
+    survey_invitation = source == "Across Health" and bool(re.search(
+        r"\\bmaturometer 2026\\b", text))
+    content_type_hint = ("survey_invitation" if survey_invitation else
+                         "publisher_report_label" if kind in ("Industry Report", "White Paper") else
+                         "publisher_editorial_or_unknown")
+
     if out_of_scope and ("clinical operations" in text or "clinical trial" in text or not strong):
         queue="off_scope_archive"
         reason="clinical_or_regulatory_topic_outside_customer_excellence"
@@ -63,6 +74,9 @@ def triage(row):
     else:
         queue="off_scope_archive"
         reason="no_clear_customer_excellence_signal"
+    if survey_invitation:
+        queue="secondary_editorial_review"
+        reason="survey_invitation_not_published_findings"
     if quality=="promotional_blurb_needs_verification":
         queue="secondary_editorial_review"
         reason="promotional_text_not_a_verified_article_title"
@@ -75,6 +89,8 @@ def triage(row):
         "publication_date":None,"publication_date_status":"UNVERIFIED",
         "evidence_assessment":"NOT_PERFORMED",
         "source_content_status":"may_be_vendor_promotional_material",
+        "content_type_hint":content_type_hint,
+        "content_type_verification":"NOT_PERFORMED",
         "auto_publish":False
     }
 
