@@ -5,7 +5,7 @@ permissions:
   contents: read
 jobs:
   collect:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
@@ -14,9 +14,11 @@ jobs:
           python-version: '3.12'
       - name: Compile collector
         run: python -m py_compile scripts/collect_govuk.py
-      - name: Fetch public GOV.UK metadata
+      - name: Unit tests (offline)
+        run: PYTHONPATH=scripts python -m unittest discover -s tests -v
+      - name: Fetch and triage public GOV.UK metadata
         run: python scripts/collect_govuk.py
-      - name: Upload candidate review file (not published)
+      - name: Upload review queue (not published)
         uses: actions/upload-artifact@v4
         with:
           name: govuk-review-candidates
