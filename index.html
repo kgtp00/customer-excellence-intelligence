@@ -7,6 +7,9 @@
 <div class="section-title"><h2>Research library</h2><span class="subtle">Editorially curated · searchable</span></div>
 <section class="controls" aria-label="Research filters"><div><label for="q">Search articles and insights</label><input id="q" type="search" placeholder="e.g. orchestration, AI, MLR, ROI"></div><div><label for="domain">Functional domain</label><select id="domain"><option value="">All domains</option></select></div><div><label for="lens">Intelligence lens</label><select id="lens"><option value="">All research</option><option value="ai">AI transformation</option><option value="uk">UK relevance</option><option value="saved">Saved articles</option></select></div><button id="reset">Clear filters</button></section>
 <p class="status" id="status">Loading published research records…</p><section id="results" class="grid" aria-live="polite"></section>
+<section aria-label="New research discoveries"><div class="section-title"><h2>Newly discovered research</h2><span class="subtle">Automatic discovery · titles and links only</span></div>
+<p class="status">These links are detected by the collection engine but <strong>have not been editorially verified</strong>. Discovery date is not publication date. Executive interpretations appear only in the curated library above.</p>
+<p id="discoveryStatus" class="status">Loading discovery feed…</p><div id="discoveries" class="grid"></div></section>
 </main><footer>Customer Excellence Intelligence · Research prototype · Public external sources only · Editorial interpretations not company guidance</footer>
 <script>
 (function(){
@@ -36,6 +39,26 @@ const btn=document.createElement('button');btn.className='save';btn.type='button
 Promise.resolve().then(async()=>{
 try{const resp=await fetch('./data/library.json',{cache:'no-store'});if(!resp.ok)throw Error('HTTP '+resp.status);const data=await resp.json();records=Array.isArray(data.items)?data.items.filter(x=>/^https:\/\//.test(x.url)):[];$('recordCount').textContent=records.length;$('sourceCount').textContent=new Set(records.map(x=>x.source)).size;$('aiCount').textContent=records.filter(x=>x.ai).length;render()}catch(err){$('status').textContent='The library could not be loaded ('+err.message+'). Reload the page later.';p(results,'empty','Data loading error. No unverified fallback feed has been substituted.','div')}
 });
+async function loadDiscoveries(){
+const root=$('discoveries');
+try{
+ const resp=await fetch('./data/discoveries.json',{cache:'no-store'});
+ if(!resp.ok)throw new Error('not yet available');
+ const data=await resp.json(), items=Array.isArray(data.items)?data.items:[];
+ root.replaceChildren();
+ $('discoveryStatus').textContent=items.length+' research links detected; all unreviewed. Last collection: '+(data.generated_on||'unknown')+'.';
+ for(const x of items.slice(0,24)){
+   if(!/^https:\/\//.test(x.url))continue;
+   const card=document.createElement('article');card.className='card';
+   p(card,'meta',x.source+' · first detected '+x.first_seen);
+   p(card,'',x.title,'h3');
+   p(card,'subtle','Publication date not verified · No findings assessed.');
+   const a=document.createElement('a');a.textContent='Read original source ↗';a.className='open';a.href=x.url;a.rel='noopener noreferrer';a.target='_blank';card.append(a);
+   root.append(card);
+ }
+}catch(e){$('discoveryStatus').textContent='No automatic discovery results are available yet. The scheduled collector requires a successful first run.'}
+}
+loadDiscoveries();
 for(const id of ['q','domain','lens'])$(id).addEventListener(id==='q'?'input':'change',render);
 $('reset').addEventListener('click',()=>{$('q').value='';$('domain').value='';$('lens').value='';render()});
 })();
