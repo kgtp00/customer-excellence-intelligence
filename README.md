@@ -1,22 +1,32 @@
-# Customer Excellence Intelligence Lab
+# Customer Excellence Intelligence
 
-Independent, public-information-only **staging prototype**. Not affiliated with or endorsed by Novartis.
+Independent **global-first** public-source research prototype for pharmaceutical Customer Excellence and AI-enabled transformation. Not affiliated with or endorsed by Novartis.
 
-## Status
-- Global-first intelligence taxonomy and AI radar: visual prototype.
-- Static GitHub Pages frontend: this repository.
-- Live source collection, evidence verification, automatic publication, briefing delivery and shared bookmarks: **NOT implemented**.
-- Previous editorial pilot records are deliberately **not** published because they have not all been independently verified.
+## Published website
+- Frontend: `index.html`, hosted on GitHub Pages after Pages is enabled.
+- Curated review library: `data/library.json`.
+- The library contains 14 manually reviewed public-source summaries with evidence limitations and executive questions.
+- Research publishers may be commercially interested parties. Editorial interpretations are not independent verification or operating guidance.
+- Three records intentionally omit publication dates because precise dates could not be confirmed.
 
-## Deploy GitHub Pages (manual)
-GitHub repository → **Settings** → **Pages** → under **Build and deployment**, choose **Deploy from a branch** → select **main** and **/(root)** → **Save**. Give GitHub time to deploy, then use the Pages URL shown in Settings.
+## Features
+Search by title, summary and implications; filter by functional domain, AI relevance, and UK tag; view evidence limitations and original sources. Saved articles use local browser storage only and do not sync between users or devices.
 
-## Editorial and security
-Use public sources only. Never commit confidential corporate information, personal data, credentials or proprietary reports. Recheck third-party rights and permissions before adding content. Add an editorial review gate before automatic publishing.
+## Research collection (manual test only)
+- `.github/workflows/collection-smoke-test.yml` examines public GOV.UK/MHRA metadata.
+- `.github/workflows/global-source-smoke-test.yml` discovers public specialist-publisher links and runs conservative triage.
+- Both workflows are manually triggered. Their unapproved output is kept in short-lived workflow artifacts, not automatically committed to `data/library.json`.
+- Never assume crawler discovery dates are article publication dates.
+- Robots restrictions and publisher terms must be respected.
 
-## Next engineering work
-1. Correct pharma relevance filtering and date checks.
-2. Validate specialist-publisher discovery and RSS/API requests.
-3. Add ingestion pipeline and deduplication.
-4. Store candidate records separately from reviewed/published items.
-5. Introduce reviewed intelligence and (later) scheduling.
+## Editorial release policy
+Only an editor may add a record after verifying the source's title and URL; where possible publication date; its content type, findings and limitations; and the distinction between research evidence and our interpretation. Records with dates not established must be labelled as such. Never publish confidential corporate information, personal data, proprietary full texts or credentials.
+
+## Current limitations
+No automatic publishing, scheduled collection, AI API scoring, live ingestion into the site, user login, shared bookmarking or full-text semantic research assistant. This is a **prototype with an editorially curated library**, not a fully automated intelligence service.
+
+## Next milestones
+1. Validate the 14 published entries and source links in the user's own browser.
+2. Improve global source coverage and discovery dates, especially IQVIA and DT Consulting.
+3. Add a durable editorial review/approval workflow with provenance.
+4. Evaluate scheduled collection and optional no-cost/low-cost AI augmentation only after quality and licensing checks.
